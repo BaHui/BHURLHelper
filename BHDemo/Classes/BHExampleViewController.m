@@ -37,29 +37,29 @@ static NSString *const DEMO_VIEWS_STORYBOARD_NAME = @"DemoViews";
 #pragma mark - Private Methods
 
 - (void)addParameterTest {
+	// 添加参数
 	NSString *urlString = @"https://github.com";
-
 	NSString *addResult = [urlString addParameters:@{@"name" : @"qiaobahui"}];
 	NSLog(@"addResult: %@", addResult); // 输出结果: https://github.com?name=qiaobahui
 }
 
 - (void)deleteParameterTest {
+	// 删除"age"对应的参数对;
 	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-
 	NSString *deleteResult = [urlString deleteParameterOfKey:@"age"];
 	NSLog(@"deleteResult: %@", deleteResult); // 输出结果: https://github.com?name=qiaobahui
 }
 
 - (void)modifyParameterTest {
+	// 修改"age"的值 = 100, 原值为23;
 	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-
 	NSString *modifyResult = [urlString modifyParameterOfKey:@"age" toValue:@"100"];
 	NSLog(@"modifyResult: %@", modifyResult); // 输出结果: https://github.com?name=qiaobahui&age=100
 }
 
 - (void)parseAllParametersTest {
+	// 获取链接中的参数和值
 	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-
 	NSDictionary *parametersResult = [urlString parseURLParameters];
 	NSLog(@"parameterResult: %@", parametersResult); // 输出结果: parameterResult: {age = 23; name = qiaobahui;}
 }
