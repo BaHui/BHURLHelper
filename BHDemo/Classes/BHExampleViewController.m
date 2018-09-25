@@ -11,6 +11,8 @@
 
 @interface BHExampleViewController ()
 
+@property (nonatomic, copy) NSString *originalUrlString;
+
 @end
 
 static NSString *const DEMO_VIEWS_STORYBOARD_NAME = @"DemoViews";
@@ -27,6 +29,7 @@ static NSString *const DEMO_VIEWS_STORYBOARD_NAME = @"DemoViews";
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.originalUrlString = @"https://github.com?name=qiaobahui&age=23";
 
 	[self addParameterTest];
 	[self deleteParameterTest];
@@ -38,29 +41,25 @@ static NSString *const DEMO_VIEWS_STORYBOARD_NAME = @"DemoViews";
 
 - (void)addParameterTest {
 	// 添加参数
-	NSString *urlString = @"https://github.com";
-	NSString *addResult = [urlString addParameters:@{@"name" : @"qiaobahui"}];
-	NSLog(@"addResult: %@", addResult); // 输出结果: https://github.com?name=qiaobahui
+	NSString *addResult = [self.originalUrlString addParameters:@{@"sex" : @"man"}];
+	NSLog(@"addResult: %@", addResult); // 输出结果: https://github.com?name=qiaobahui&age=23&sex=man
 }
 
 - (void)deleteParameterTest {
 	// 删除"age"对应的参数对;
-	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-	NSString *deleteResult = [urlString deleteParameterOfKey:@"age"];
+	NSString *deleteResult = [self.originalUrlString deleteParameterOfKey:@"age"];
 	NSLog(@"deleteResult: %@", deleteResult); // 输出结果: https://github.com?name=qiaobahui
 }
 
 - (void)modifyParameterTest {
 	// 修改"age"的值 = 100, 原值为23;
-	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-	NSString *modifyResult = [urlString modifyParameterOfKey:@"age" toValue:@"100"];
+	NSString *modifyResult = [self.originalUrlString modifyParameterOfKey:@"age" toValue:@"100"];
 	NSLog(@"modifyResult: %@", modifyResult); // 输出结果: https://github.com?name=qiaobahui&age=100
 }
 
 - (void)parseAllParametersTest {
 	// 获取链接中的参数和值
-	NSString *urlString = @"https://github.com?name=qiaobahui&age=23";
-	NSDictionary *parametersResult = [urlString parseURLParameters];
+	NSDictionary *parametersResult = [self.originalUrlString parseURLParameters];
 	NSLog(@"parameterResult: %@", parametersResult); // 输出结果: parameterResult: {age = 23; name = qiaobahui;}
 }
 
